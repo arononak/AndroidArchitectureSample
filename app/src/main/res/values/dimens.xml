@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_bottom_padding">72dp</dimen>
+
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_extra_small">4dp</dimen>
+
+    <dimen name="card_view_height">80dp</dimen>
+    <dimen name="card_side_margin">8dp</dimen>
+    <dimen name="card_top_margin">4dp</dimen>
+    <dimen name="card_bottom_margin">4dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_corner_radius">1dp</dimen>
+
+    <dimen name="toolbar_elevation">5dp</dimen>
+
+    <dimen name="header_margin">24dp</dimen>
+    <dimen name="avatar_size">60dp</dimen>
+    <dimen name="entry_item_height">80dp</dimen>
+    <dimen name="promoted_item_height">110dp</dimen>
+    <dimen name="small_avatar_size">30dp</dimen>
+
+</resources>
