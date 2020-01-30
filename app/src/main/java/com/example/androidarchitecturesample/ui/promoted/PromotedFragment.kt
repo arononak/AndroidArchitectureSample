@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidarchitecturesample.databinding.PromotedFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PromotedFragment : Fragment() {
 
@@ -16,7 +16,7 @@ class PromotedFragment : Fragment() {
         fun newInstance() = PromotedFragment()
     }
 
-    private val viewModel: PromotedViewModel by viewModels()
+    private val viewModel by viewModel<PromotedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +27,9 @@ class PromotedFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
-        viewModel.promotedLiveData.observe(this, Observer {
-            adapter.submitList(it)
-        })
+        viewModel.promotedLiveData.observe(viewLifecycleOwner) { result ->
+            adapter.submitList(result)
+        }
 
         return binding.root
     }

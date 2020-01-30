@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidarchitecturesample.databinding.EntryFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EntryFragment : Fragment() {
 
@@ -16,7 +16,7 @@ class EntryFragment : Fragment() {
         fun newInstance() = EntryFragment()
     }
 
-    private val viewModel: EntryViewModel by viewModels()
+    private val viewModel by viewModel<EntryViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +27,9 @@ class EntryFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
-        viewModel.entriesLiveData.observe(this, Observer {
-            adapter.submitList(it)
-        })
+        viewModel.entriesLiveData.observe(viewLifecycleOwner) { result ->
+            adapter.submitList(result)
+        }
 
         return binding.root
     }

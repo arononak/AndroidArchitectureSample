@@ -2,13 +2,12 @@ package com.example.androidarchitecturesample.ui.promoted
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.example.androidarchitecturesample.data.api.Promoted
+import com.example.androidarchitecturesample.data.model.Promoted
 
-class PromotedViewModel : ViewModel() {
+class PromotedViewModel(promotedDataSource: PromotedDataSource) : ViewModel() {
 
     var promotedLiveData: LiveData<PagedList<Promoted>>
 
@@ -19,9 +18,7 @@ class PromotedViewModel : ViewModel() {
             .build()
 
         val dataSourceFactory = object : DataSource.Factory<Long, Promoted>() {
-            override fun create(): DataSource<Long, Promoted> {
-                return PromotedDataSource(viewModelScope.coroutineContext)
-            }
+            override fun create(): DataSource<Long, Promoted> = promotedDataSource
         }
 
         promotedLiveData = LivePagedListBuilder<Long, Promoted>(dataSourceFactory, config).build()

@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.example.androidarchitecturesample.data.api.Entry
+import com.example.androidarchitecturesample.data.model.Entry
 
-class EntryViewModel : ViewModel() {
+class EntryViewModel(entryDataSource: EntryDataSource) : ViewModel() {
 
     var entriesLiveData: LiveData<PagedList<Entry>>
 
@@ -19,9 +19,7 @@ class EntryViewModel : ViewModel() {
             .build()
 
         val dataSourceFactory = object : DataSource.Factory<Long, Entry>() {
-            override fun create(): DataSource<Long, Entry> {
-                return EntryDataSource(viewModelScope.coroutineContext)
-            }
+            override fun create(): DataSource<Long, Entry> = entryDataSource
         }
 
         entriesLiveData = LivePagedListBuilder<Long, Entry>(dataSourceFactory, config).build()

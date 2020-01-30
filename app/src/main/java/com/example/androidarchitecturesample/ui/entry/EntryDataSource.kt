@@ -2,26 +2,19 @@ package com.example.androidarchitecturesample.ui.entry
 
 import android.util.Log
 import androidx.paging.PageKeyedDataSource
-import com.example.androidarchitecturesample.data.api.Entry
 import com.example.androidarchitecturesample.data.api.WykopApi
+import com.example.androidarchitecturesample.data.model.Entry
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
-
-class EntryDataSource(coroutineContext: CoroutineContext) : PageKeyedDataSource<Long, Entry>() {
-
-    private val job = Job()
-    private val scope = CoroutineScope(coroutineContext + job)
+class EntryDataSource(private val api: WykopApi) : PageKeyedDataSource<Long, Entry>() {
 
     override fun loadInitial(
         params: LoadInitialParams<Long>,
         callback: LoadInitialCallback<Long, Entry>
     ) {
-        scope.launch {
+        GlobalScope.launch {
             try {
-                val api = WykopApi.getInstance()
-
-                val items = listOf(
+                listOf(
                     async(Dispatchers.IO) { api.fetchEntries(1) },
                     async(Dispatchers.IO) { api.fetchEntries(2) },
                     async(Dispatchers.IO) { api.fetchEntries(3) }
@@ -29,8 +22,7 @@ class EntryDataSource(coroutineContext: CoroutineContext) : PageKeyedDataSource<
                     .filter { it.isSuccessful }
                     .mapNotNull { it.body() }
                     .flatten()
-
-                callback.onResult(items, null, 4)
+                    .let { callback.onResult(it, null, 4) }
 
             } catch (exception: Exception) {
                 Log.e("PostsDataSource", "Failed to fetch data!")
@@ -43,28 +35,20 @@ class EntryDataSource(coroutineContext: CoroutineContext) : PageKeyedDataSource<
     }
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, Entry>) {
-        scope.launch {
+        GlobalScope.launch {
             try {
-                val api = WykopApi.getInstance()
-
-                val items = listOf(
+                listOf(
                     async(Dispatchers.IO) { api.fetchEntries(params.key.toInt()) }
                 ).awaitAll()
                     .filter { it.isSuccessful }
                     .mapNotNull { it.body() }
                     .flatten()
-
-                callback.onResult(items, params.key + 1)
+                    .let { callback.onResult(it, params.key + 1) }
 
             } catch (exception: Exception) {
                 Log.e("PostsDataSource", "Failed to fetch data!")
             }
         }
 
-    }
-
-    override fun invalidate() {
-        super.invalidate()
-        job.cancel()
     }
 }

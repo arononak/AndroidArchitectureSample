@@ -81,6 +81,15 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
 
+    implementation "org.koin:koin-core:$rootProject.koinVersion"
+    implementation "org.koin:koin-core-ext:$rootProject.koinVersion"
+    implementation "org.koin:koin-android:$rootProject.koinVersion"
+    implementation "org.koin:koin-androidx-scope:$rootProject.koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$rootProject.koinVersion"
+    implementation "org.koin:koin-androidx-fragment:$rootProject.koinVersion"
+    implementation "org.koin:koin-androidx-ext:$rootProject.koinVersion"
+    androidTestImplementation "org.koin:koin-test:$rootProject.koinVersion"
+
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"

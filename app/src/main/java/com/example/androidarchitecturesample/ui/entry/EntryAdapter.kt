@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.androidarchitecturesample.R
-import com.example.androidarchitecturesample.data.api.Entry
+import com.example.androidarchitecturesample.data.model.Entry
 import com.example.androidarchitecturesample.ui.main.MainViewPagerFragmentDirections
 import kotlinx.android.synthetic.main.entry_item.view.*
 
@@ -25,9 +25,9 @@ class EntryAdapter : PagedListAdapter<Entry, EntryAdapter.ViewHolder>(EntryDiffC
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val avatarImage= itemView.avatar
-        val authorText = itemView.author
-        val dateText = itemView.date
+        private val avatarImage= itemView.avatar
+        private val authorText = itemView.author
+        private val dateText = itemView.date
 
         fun bind(entry: Entry) {
             with(entry) {

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.androidarchitecturesample.R
-import com.example.androidarchitecturesample.data.api.Promoted
+import com.example.androidarchitecturesample.data.model.Promoted
 import com.example.androidarchitecturesample.ui.main.MainViewPagerFragmentDirections
 import kotlinx.android.synthetic.main.promoted_item.view.*
 
