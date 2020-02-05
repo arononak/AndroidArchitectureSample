@@ -20,9 +20,9 @@ val networkModule = module {
     factory { PromotedDataSource(get()) }
 }
 
-fun provideBaseUrl(): String = "https://a.wykop.pl/"
+private fun provideBaseUrl(): String = "https://a.wykop.pl/"
 
-fun provideRetrofit(baseUrl: String, okHttpClient: OkHttpClient): Retrofit =
+private fun provideRetrofit(baseUrl: String, okHttpClient: OkHttpClient): Retrofit =
     Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(okHttpClient)
@@ -30,13 +30,13 @@ fun provideRetrofit(baseUrl: String, okHttpClient: OkHttpClient): Retrofit =
         //.addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
-fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+private fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
     OkHttpClient.Builder()
         .addInterceptor(httpLoggingInterceptor)
         .build()
 
-fun provideLoggingInterceptor(): HttpLoggingInterceptor =
+private fun provideLoggingInterceptor(): HttpLoggingInterceptor =
     HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { Log.d("API", it) })
         .also { it.level = HttpLoggingInterceptor.Level.BASIC }
 
-fun provideWykopApi(retrofit: Retrofit): WykopApi = retrofit.create(WykopApi::class.java)
+private fun provideWykopApi(retrofit: Retrofit): WykopApi = retrofit.create(WykopApi::class.java)

@@ -2,7 +2,7 @@
 buildscript {
     ext {
         compileSdkVersion = 28
-        minSdkVersion = 14
+        minSdkVersion = 18
         targetSdkVersion = 28
 
         appCompatVersion = '1.2.0-alpha01'
@@ -12,7 +12,7 @@ buildscript {
         espressoVersion = '3.1.1'
         fragmentVersion = '1.1.0-alpha09'
         glideVersion = '4.10.0'
-        gradleVersion = '3.5.2'
+        gradleVersion = '4.0.0-alpha09'
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
         koinVersion = '2.1.0-alpha-10'

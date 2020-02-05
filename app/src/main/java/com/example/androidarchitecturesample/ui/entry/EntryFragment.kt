@@ -24,8 +24,8 @@ class EntryFragment : Fragment() {
     ): View {
         val binding = EntryFragmentBinding.inflate(inflater, container, false)
         val adapter = EntryAdapter()
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.entryRecyclerView.adapter = adapter
+        binding.entryRecyclerView.layoutManager = LinearLayoutManager(context)
 
         viewModel.entriesLiveData.observe(viewLifecycleOwner) { result ->
             adapter.submitList(result)

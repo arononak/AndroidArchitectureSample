@@ -24,8 +24,8 @@ class PromotedFragment : Fragment() {
     ): View {
         val binding = PromotedFragmentBinding.inflate(inflater, container, false)
         val adapter = PromotedAdapter()
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.promotedRecyclerView.adapter = adapter
+        binding.promotedRecyclerView.layoutManager = LinearLayoutManager(context)
 
         viewModel.promotedLiveData.observe(viewLifecycleOwner) { result ->
             adapter.submitList(result)
