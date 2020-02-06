@@ -13,7 +13,7 @@ class MainActivityTest {
     @Rule @JvmField
     var activityTestRule = ActivityTestRule(MainActivity::class.java)
 
-    @Test fun clickAddPlant_OpensPlantList() {
+    @Test fun clickBothTabs_RecyclerViewIsDisplayed() {
         onView(withText(R.string.tab_promoted)).perform(click())
         onView(withId(R.id.promoted_recycler_view)).check(matches(isDisplayed()))
 
